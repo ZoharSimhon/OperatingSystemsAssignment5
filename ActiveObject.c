@@ -1,22 +1,25 @@
 #include "ActiveObject.h"
 
-void activate(pActiveObject this)
+void* activate(void* this)
 {
+    pActiveObject pao = (pActiveObject)this;
     void *data;
     size_t counter = 0;
-    while (data = dequeue(this->queue))
+    while (1)
     {
-        if (this->func != NULL)
+        data = dequeue(pao->queue);
+        if (pao->func != NULL)
         {
-            this->func(data);
+            pao->func(data);
         }
         counter++;
 
         // if counter == N
     }
+    return NULL;
 }
 
-pActiveObject CreateActiveObject(pQueue queue, void(func)(void *), size_t N)
+pActiveObject CreateActiveObject(void(func)(void *), size_t N)
 {
     pActiveObject this = (pActiveObject)malloc(sizeof(ActiveObject));
     if (this == NULL)
@@ -25,7 +28,14 @@ pActiveObject CreateActiveObject(pQueue queue, void(func)(void *), size_t N)
         exit(1);
     }
 
-    this->queue = queue;
+    this->queue = createQueue();
+    if (this->queue == NULL)
+    {
+        perror("createQueue");
+        free(this);
+        exit(1);
+    }
+
     this->func = func;
     this->N = N;
     this->next = NULL;
@@ -38,7 +48,7 @@ pActiveObject CreateActiveObject(pQueue queue, void(func)(void *), size_t N)
     }
 
     // start thread
-    if (pthread_create(pReactor->thread, NULL, activate, this) != 0)
+    if (pthread_create(this->thread, NULL, activate, this) != 0)
     {
         perror("pthread_create");
     }
@@ -48,12 +58,17 @@ pActiveObject CreateActiveObject(pQueue queue, void(func)(void *), size_t N)
 
 pQueue getQueue(pActiveObject this)
 {
-    return activeObject->queue;
+    return this->queue;
 }
 
 void stop(pActiveObject this)
 {
-    pthread_cancel(this->thread);
+    pthread_cancel(*this->thread);
     destoryQueue(this->queue);
     free(this);
+}
+
+void print(void *data)
+{
+    printf("%p\n", data);
 }
