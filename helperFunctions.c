@@ -1,4 +1,6 @@
-#include "helperFunction.h"
+#include "helperFunctions.h"
+#include "Queue.h"
+#include "ActiveObject.h"
 
 int isPrime(int num)
 {
@@ -10,7 +12,27 @@ int isPrime(int num)
     return 1;
 }
 
-// int AOTask1(int N, int seed)
-// {
+int AOTask1(void *data)
+{
+    int randomNumber = rand() % 900000 + 100000;
+    printf("%d\n",randomNumber);
+    return NULL;
+}
+int AOTask2(void *pao)
+{
+    pActiveObject this = (pActiveObject)pao;
 
-// }
+    return NULL;
+}
+int AOTask3(void *pao)
+{
+    pActiveObject this = (pActiveObject)pao;
+
+    return NULL;
+}
+int AOTask4(void *pao)
+{
+    pActiveObject this = (pActiveObject)pao;
+
+    return NULL;
+}

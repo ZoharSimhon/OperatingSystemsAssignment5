@@ -6,7 +6,7 @@ typedef struct _ActiveObject
 {
     pthread_t *thread;
     pQueue queue;
-    void (*func)(void *);
+    int (*func)(void *);
     struct _ActiveObject *next;
     size_t N;
 } ActiveObject, *pActiveObject;

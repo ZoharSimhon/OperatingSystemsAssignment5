@@ -7,4 +7,7 @@
 
 
 int isPrime(int);
-// int AOTask1(int N, int seed);
+int AOTask1(void* pao);
+int AOTask2(void* pao);
+int AOTask3(void* pao);
+int AOTask4(void* pao);

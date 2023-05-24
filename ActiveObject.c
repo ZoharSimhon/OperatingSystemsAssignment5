@@ -1,20 +1,25 @@
 #include "ActiveObject.h"
+#include "helperFunctions.h"
 
-void* activate(void* this)
+void *activate(void *this)
 {
     pActiveObject pao = (pActiveObject)this;
     void *data;
-    size_t counter = 0;
+    int result;
     while (1)
     {
-        data = dequeue(pao->queue);
+        if (pao->func != AOTask1)
+            data = dequeue(pao->queue);
         if (pao->func != NULL)
         {
-            pao->func(data);
+            result = pao->func(data);
+            if (pao->next)
+                enqueue(pao->next->queue, (void *)result);
         }
-        counter++;
+        pao->N--;
 
-        // if counter == N
+        if (0 == pao->N)
+            break;
     }
     return NULL;
 }
@@ -66,9 +71,4 @@ void stop(pActiveObject this)
     pthread_cancel(*this->thread);
     destoryQueue(this->queue);
     free(this);
-}
-
-void print(void *data)
-{
-    printf("%p\n", data);
 }
