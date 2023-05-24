@@ -14,25 +14,36 @@ int isPrime(int num)
 
 int AOTask1(void *data)
 {
-    int randomNumber = rand() % 900000 + 100000;
-    printf("%d\n",randomNumber);
-    return NULL;
+    sleep(1);
+    return rand() % 900000 + 100000;
 }
-int AOTask2(void *pao)
+int AOTask2(void *data)
 {
-    pActiveObject this = (pActiveObject)pao;
-
-    return NULL;
+    int number = (int)data;
+    printf("%d\n",number);
+    if(isPrime(number))
+        printf("true\n");
+    else
+        printf("false\n");
+    return number+11;
 }
-int AOTask3(void *pao)
+int AOTask3(void *data)
 {
-    pActiveObject this = (pActiveObject)pao;
+    int number = (int)data;
+    printf("%d\n",number);
 
-    return NULL;
+    if(isPrime(number))
+        printf("true\n");
+    else
+        printf("false\n");
+    return number-13;
 }
-int AOTask4(void *pao)
+int AOTask4(void *data)
 {
-    pActiveObject this = (pActiveObject)pao;
+    int number = (int)data;
+    printf("%d\n",number);
+    number+=2;
+    printf("%d\n",number);
 
-    return NULL;
+    return 0;
 }
