@@ -2,6 +2,7 @@
 
 #include "Queue.h"
 
+//define the struct
 typedef struct _ActiveObject
 {
     pthread_t *thread;
