@@ -7,3 +7,4 @@
 
 
 int isPrime(int);
+// int AOTask1(int N, int seed);
