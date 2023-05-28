@@ -2,7 +2,7 @@
 #include "Queue.h"
 #include "ActiveObject.h"
 
-int isPrime(int num)
+int isPrime(size_t num)
 {
     for (size_t i = 2; i * i < num; i++)
     {
@@ -14,13 +14,13 @@ int isPrime(int num)
 
 int AOTask1(void *data)
 {
-    sleep(1);
+    usleep(1000);
     return rand() % 900000 + 100000;
 }
 int AOTask2(void *data)
 {
     int number = (int)data;
-    printf("%d\n",number);
+    printf("\n%d\n",number);
     if(isPrime(number))
         printf("true\n");
     else

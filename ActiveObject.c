@@ -30,7 +30,7 @@ void *activate(void *this)
     return NULL;
 }
 
-pActiveObject CreateActiveObject(void(func)(void *), size_t N)
+pActiveObject CreateActiveObject(void(func)(void *), pActiveObject next, size_t N)
 {
     pActiveObject this = (pActiveObject)malloc(sizeof(ActiveObject));
     //if the malloc didn't succeed
@@ -51,7 +51,7 @@ pActiveObject CreateActiveObject(void(func)(void *), size_t N)
 
     this->func = func;
     this->N = N;
-    this->next = NULL;
+    this->next = next;
     this->thread = (pthread_t *)calloc(1, sizeof(pthread_t));
     if (this->thread == NULL)
     //if the malloc didn't succeed - free all the data

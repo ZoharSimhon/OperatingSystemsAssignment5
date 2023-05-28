@@ -2,7 +2,7 @@
 
 #include "Queue.h"
 
-//define the struct
+// define the struct
 typedef struct _ActiveObject
 {
     pthread_t *thread;
@@ -12,7 +12,7 @@ typedef struct _ActiveObject
     size_t N;
 } ActiveObject, *pActiveObject;
 
-pActiveObject CreateActiveObject(void(func)(void *), size_t N);
+pActiveObject CreateActiveObject(void(func)(void *), pActiveObject next, size_t N);
 
 pQueue getQueue(pActiveObject this);
 

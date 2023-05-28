@@ -24,18 +24,13 @@ int main(int argc, char *argv[])
 
     srand(seed); // generate seed
 
-    // create four AO
-    pActiveObject pao1 = CreateActiveObject(AOTask1, N);
-    pActiveObject pao2 = CreateActiveObject(AOTask2, N);
-    pActiveObject pao3 = CreateActiveObject(AOTask3, N);
-    pActiveObject pao4 = CreateActiveObject(AOTask4, N);
+    // create four AOs
+    pActiveObject pao4 = CreateActiveObject(AOTask4, NULL, N);
+    pActiveObject pao3 = CreateActiveObject(AOTask3, pao4, N);
+    pActiveObject pao2 = CreateActiveObject(AOTask2, pao3, N);
+    pActiveObject pao1 = CreateActiveObject(AOTask1, pao2, N);
 
-    // set all the next value
-    pao1->next = pao2;
-    pao2->next = pao3;
-    pao3->next = pao4;
-
-    //check every second if the task are done
+    // check every second if the task are done
     while (1)
     {
         sleep(1);
